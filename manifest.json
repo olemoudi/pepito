@@ -1,0 +1,54 @@
+{
+    "manifest_version": 3,
+    "name": "Pepito",
+    "version": "1.0",
+    "action": {
+        "default_icon": {
+            "19": "icon.png",
+            "38": "icon.png"
+        },
+        "default_title": "Pepito",
+        "default_popup": "popup.html"
+    },
+    "default_locale": "en",
+    "description": "Checks webpage similarity using perceptual hashing",
+    "icons": {
+        "128": "icon.png"
+    },
+    "author": "Martín Obiols",
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["storage", "activeTab"],
+    "host_permissions": ["https://*"],
+    "short_name": "Pepito",
+    "web_accessible_resources": [
+        {
+            "resources": [
+            "icon.png"
+            ],
+            "matches": ["https://*.makensi.es/*"]
+        }
+    ],
+    "content_scripts": [
+        {
+            "matches": ["https://*.makensi.es/*"],
+            "js": ["scripts/content.js",
+                    "scripts/phash.js"],
+            "run_at" : "document_end"
+        }
+    ], 
+ "content_security_policy": {
+    "extension_pages": "default-src 'none'; style-src 'self'; media-src 'none'; child-src 'none'; connect-src 'none'; script-src 'self'; img-src 'self'; object-src 'none'"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+M",
+        "mac": "MacCtrl+Shift+M"
+      }
+    }
+  },
+  "minimum_chrome_version": "103",
+  "offline_enabled": true
+}
