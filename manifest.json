@@ -7,8 +7,7 @@
             "19": "icon.png",
             "38": "icon.png"
         },
-        "default_title": "Pepito",
-        "default_popup": "popup.html"
+        "default_title": "Pepito"
     },
     "default_locale": "en",
     "description": "Checks webpage similarity using perceptual hashing",
@@ -19,7 +18,7 @@
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": ["storage", "activeTab"],
+    "permissions": ["storage", "activeTab", "desktopCapture", "tabs"],
     "host_permissions": ["https://*"],
     "short_name": "Pepito",
     "web_accessible_resources": [
@@ -27,12 +26,15 @@
             "resources": [
             "icon.png"
             ],
-            "matches": ["https://*.makensi.es/*"]
+            "matches": ["<all_urls>"]
         }
     ],
+    "background" : {
+        "service_worker" : "scripts/background.js"
+    },
     "content_scripts": [
         {
-            "matches": ["https://*.makensi.es/*"],
+            "matches": ["<all_urls>"],
             "js": ["scripts/content.js",
                     "scripts/phash.js"],
             "run_at" : "document_end"
